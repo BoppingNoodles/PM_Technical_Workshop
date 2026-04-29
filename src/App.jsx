@@ -4,13 +4,12 @@ function App() {
   const [inventory, setInventory] = useState([]);
   const [formData, setFormData] = useState({ name: '', category: '', quantity: '', status: 'Available' });
   
-  // NEW STATE: Store the ML Audit Logs
   const [auditLogs, setAuditLogs] = useState([]);
 
-  // 1. Fetch data from Backend
+  // Fetch data from Backend
   const fetchInventory = async () => {
     try {
-      const response = await fetch('http://localhost:3000/inventory');
+      const response = await fetch('https://pm-technical-workshop.onrender.com');
       const data = await response.json();
       setInventory(data);
     } catch (err) {
@@ -60,7 +59,6 @@ function App() {
     <div style={{ padding: '40px', fontFamily: 'sans-serif', maxWidth: '1200px', margin: '0 auto' }}>
       <h1>Inventory Dashboard</h1>
 
-      {/* --- DATA SCIENCE SUMMARY METRICS --- */}
       <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
         <div style={{ padding: '20px', background: '#f0f4f8', borderRadius: '8px', flex: 1 }}>
           <h3>Total Items</h3>
@@ -76,7 +74,6 @@ function App() {
         </div>
       </div>
 
-      {/* --- ML ALERTS: DISCREPANCIES & UNCERTAINTY --- */}
       {(discrepancies.length > 0 || uncertainItems.length > 0) && (
         <div style={{ marginBottom: '30px' }}>
           {discrepancies.length > 0 && (
@@ -92,7 +89,6 @@ function App() {
         </div>
       )}
 
-      {/* ADD ITEM FORM */}
       <form onSubmit={handleSubmit} style={{ marginBottom: '30px', border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
         <h3>Add New Item</h3>
         <div style={{ display: 'flex', gap: '10px' }}>
@@ -107,7 +103,6 @@ function App() {
         </div>
       </form>
 
-      {/* --- REQUIREMENT 3: DECLARED VS OBSERVED INVENTORY --- */}
       <h3>Inventory Status</h3>
       <table border="1" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
         <thead>
